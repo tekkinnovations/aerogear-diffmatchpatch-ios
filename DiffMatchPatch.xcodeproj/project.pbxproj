@@ -28,6 +28,10 @@
 		5AD1E7F11AE267D50017CEEE /* DiffMatchPatchCFUtilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 3DA64170128DDA3400B33CE9 /* DiffMatchPatchCFUtilities.c */; };
 		6FF402CB1AE4F71400ED7FEB /* DiffMatchPatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* DiffMatchPatch.framework */; };
 		6FF402D81AE4F8AC00ED7FEB /* DiffMatchPatchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5BC0DE128CAAE400B8F5FF /* DiffMatchPatchTest.m */; };
+		840F66DE1C611827005DF58E /* NSDictionary+DMPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 840F66DC1C611827005DF58E /* NSDictionary+DMPExtensions.h */; };
+		840F66DF1C611827005DF58E /* NSDictionary+DMPExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 840F66DC1C611827005DF58E /* NSDictionary+DMPExtensions.h */; };
+		840F66E01C611827005DF58E /* NSDictionary+DMPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 840F66DD1C611827005DF58E /* NSDictionary+DMPExtensions.m */; };
+		840F66E11C611827005DF58E /* NSDictionary+DMPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 840F66DD1C611827005DF58E /* NSDictionary+DMPExtensions.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +81,8 @@
 		3DFDB2F912AEC7700084EFE3 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		5AD1E7CE1AE266530017CEEE /* DiffMatchPatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiffMatchPatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FF402C51AE4F71400ED7FEB /* DiffMatchPatch OSX Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DiffMatchPatch OSX Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		840F66DC1C611827005DF58E /* NSDictionary+DMPExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DMPExtensions.h"; sourceTree = "<group>"; };
+		840F66DD1C611827005DF58E /* NSDictionary+DMPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DMPExtensions.m"; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* DiffMatchPatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiffMatchPatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -174,6 +180,8 @@
 				3D70BCC7128EDAF80078D1A6 /* NSString+UriCompatibility.m */,
 				3DEE4C70129D484D00885485 /* NSMutableDictionary+DMPExtensions.h */,
 				3DEE4C71129D484D00885485 /* NSMutableDictionary+DMPExtensions.m */,
+				840F66DC1C611827005DF58E /* NSDictionary+DMPExtensions.h */,
+				840F66DD1C611827005DF58E /* NSDictionary+DMPExtensions.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -235,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AD1E7EB1AE267700017CEEE /* DiffMatchPatch.h in Headers */,
+				840F66DF1C611827005DF58E /* NSDictionary+DMPExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D5BC080128C44A700B8F5FF /* DiffMatchPatch.h in Headers */,
+				840F66DE1C611827005DF58E /* NSDictionary+DMPExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +420,7 @@
 				5AD1E7EC1AE267D50017CEEE /* DiffMatchPatch.m in Sources */,
 				5AD1E7ED1AE267D50017CEEE /* NSString+JavaSubstring.m in Sources */,
 				5AD1E7EE1AE267D50017CEEE /* NSString+UnicharUtilities.m in Sources */,
+				840F66E11C611827005DF58E /* NSDictionary+DMPExtensions.m in Sources */,
 				5AD1E7EF1AE267D50017CEEE /* NSString+UriCompatibility.m in Sources */,
 				5AD1E7F01AE267D50017CEEE /* NSMutableDictionary+DMPExtensions.m in Sources */,
 				5AD1E7F11AE267D50017CEEE /* DiffMatchPatchCFUtilities.c in Sources */,
@@ -431,6 +442,7 @@
 				3D5BC081128C44A700B8F5FF /* DiffMatchPatch.m in Sources */,
 				3DA641D1128DE21D00B33CE9 /* DiffMatchPatchCFUtilities.c in Sources */,
 				3D70BCC9128EDAF80078D1A6 /* NSString+UriCompatibility.m in Sources */,
+				840F66E01C611827005DF58E /* NSDictionary+DMPExtensions.m in Sources */,
 				3DEE4C73129D484D00885485 /* NSMutableDictionary+DMPExtensions.m in Sources */,
 				3DC87026129FF4B6001F602B /* NSString+JavaSubstring.m in Sources */,
 				3D08D25412A71B9C007A5316 /* NSString+UnicharUtilities.m in Sources */,

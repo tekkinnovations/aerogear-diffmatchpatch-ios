@@ -98,42 +98,42 @@ typedef NS_ENUM(NSInteger, Operation) {
 // Chunk size for context length.
 @property (nonatomic, assign) uint16_t Patch_Margin;
 
-- (NSMutableArray *)diff_mainOfOldString:(NSString *)text1 andNewString:(NSString *)text2;
-- (NSMutableArray *)diff_mainOfOldString:(NSString *)text1 andNewString:(NSString *)text2 checkLines:(BOOL)checklines;
+- (NSArray<Diff *> *)diff_mainOfOldString:(NSString *)text1 andNewString:(NSString *)text2;
+- (NSArray<Diff *> *)diff_mainOfOldString:(NSString *)text1 andNewString:(NSString *)text2 checkLines:(BOOL)checklines;
 - (NSUInteger)diff_commonPrefixOfFirstString:(NSString *)text1 andSecondString:(NSString *)text2;
 - (NSUInteger)diff_commonSuffixOfFirstString:(NSString *)text1 andSecondString:(NSString *)text2;
-- (void)diff_cleanupSemantic:(NSMutableArray *)diffs;
-- (void)diff_cleanupSemanticLossless:(NSMutableArray *)diffs;
-- (void)diff_cleanupEfficiency:(NSMutableArray *)diffs;
-- (void)diff_cleanupMerge:(NSMutableArray *)diffs;
-- (NSUInteger)diff_xIndexIn:(NSMutableArray *)diffs location:(NSUInteger) loc;
-- (NSString *)diff_prettyHtml:(NSMutableArray *)diffs;
-- (NSString *)diff_text1:(NSMutableArray *)diffs;
-- (NSString *)diff_text2:(NSMutableArray *)diffs;
-- (NSUInteger)diff_levenshtein:(NSMutableArray *)diffs;
-- (NSString *)diff_toDelta:(NSMutableArray *)diffs;
-- (NSMutableArray *)diff_fromDeltaWithText:(NSString *)text1 andDelta:(NSString *)delta error:(NSError **)error;
+- (NSArray<Diff *> *)diff_cleanupSemantic:(NSArray<Diff *> *)diffs;
+- (NSArray<Diff *> *)diff_cleanupSemanticLossless:(NSArray<Diff *> *)diffs;
+- (NSArray<Diff *> *)diff_cleanupEfficiency:(NSArray<Diff *> *)diffs;
+- (NSArray<Diff *> *)diff_cleanupMerge:(NSArray<Diff *> *)diffs;
+- (NSUInteger)diff_xIndexIn:(NSArray<Diff *> *)diffs location:(NSUInteger) loc;
+- (NSString *)diff_prettyHtml:(NSArray<Diff *> *)diffs;
+- (NSString *)diff_text1:(NSArray<Diff *> *)diffs;
+- (NSString *)diff_text2:(NSArray<Diff *> *)diffs;
+- (NSUInteger)diff_levenshtein:(NSArray<Diff *> *)diffs;
+- (NSString *)diff_toDelta:(NSArray<Diff *> *)diffs;
+- (NSArray<Diff *> *)diff_fromDeltaWithText:(NSString *)text1 andDelta:(NSString *)delta error:(NSError **)error;
 
 - (NSUInteger)match_mainForText:(NSString *)text pattern:(NSString *)pattern near:(NSUInteger)loc;
-- (NSMutableDictionary *)match_alphabet:(NSString *)pattern;
+- (NSDictionary<NSString *,NSNumber *> *)match_alphabet:(NSString *)pattern;
 
-- (NSMutableArray *)patch_makeFromOldString:(NSString *)text1 andNewString:(NSString *)text2;
-- (NSMutableArray *)patch_makeFromDiffs:(NSMutableArray *)diffs;
-- (NSMutableArray *)patch_makeFromOldString:(NSString *)text1 newString:(NSString *)text2 diffs:(NSMutableArray *)diffs;
-- (NSMutableArray *)patch_makeFromOldString:(NSString *)text1 andDiffs:(NSMutableArray *)diffs;
-- (NSMutableArray *)patch_deepCopy:(NSArray *)patches; // Copy rule applies!
-- (NSArray *)patch_apply:(NSArray *)sourcePatches toString:(NSString *)text;
-- (NSString *)patch_addPadding:(NSMutableArray *)patches;
-- (void)patch_splitMax:(NSMutableArray *)patches;
-- (NSString *)patch_toText:(NSMutableArray *)patches;
-- (NSMutableArray *)patch_fromText:(NSString *)textline error:(NSError **)error;
+- (NSArray<Patch *> *)patch_makeFromOldString:(NSString *)text1 andNewString:(NSString *)text2;
+- (NSArray<Patch *> *)patch_makeFromDiffs:(NSArray<Diff *> *)diffs;
+- (NSArray<Patch *> *)patch_makeFromOldString:(NSString *)text1 newString:(NSString *)text2 diffs:(NSArray<Diff *> *)diffs;
+- (NSArray<Patch *> *)patch_makeFromOldString:(NSString *)text1 andDiffs:(NSArray<Diff *> *)diffs;
+- (NSArray<Patch *> *)patch_deepCopy:(NSArray<Patch *> *)patches; // Copy rule applies!
+- (NSArray *)patch_apply:(NSArray<Patch *> *)sourcePatches toString:(NSString *)text;
+- (NSString *)patch_addPadding:(NSArray<Patch *> *)patches;
+- (NSArray<Patch *> *)patch_splitMax:(NSArray<Patch *> *)immutablePatches;
+- (NSString *)patch_toText:(NSArray<Patch *> *)patches;
+- (NSArray<Patch *> *)patch_fromText:(NSString *)textline error:(NSError **)error;
 
 @end
 
 
 @interface DiffMatchPatch (PrivateMethods)
 
-- (NSMutableArray *)diff_mainOfOldString:(NSString *)text1 andNewString:(NSString *)text2 checkLines:(BOOL)checklines deadline:(NSTimeInterval)deadline;
+- (NSArray<Diff *> *)diff_mainOfOldString:(NSString *)text1 andNewString:(NSString *)text2 checkLines:(BOOL)checklines deadline:(NSTimeInterval)deadline;
 - (NSMutableArray *)diff_computeFromOldString:(NSString *)text1 andNewString:(NSString *)text2 checkLines:(BOOL)checklines deadline:(NSTimeInterval)deadline;
 - (NSMutableArray *)diff_lineModeFromOldString:(NSString *)text1 andNewString:(NSString *)text2 deadline:(NSTimeInterval)deadline;
 - (NSArray *)diff_linesToCharsForFirstString:(NSString *)text1 andSecondString:(NSString *)text1;

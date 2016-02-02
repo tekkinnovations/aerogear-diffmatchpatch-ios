@@ -27,81 +27,28 @@
 
 @implementation NSMutableDictionary (DMPExtensions)
 
-- (id)diff_objectForIntegerKey:(NSInteger)keyInteger;
-{
-  return self[@(keyInteger)];
-}
-
-- (id)diff_objectForUnsignedIntegerKey:(NSUInteger)keyUInteger;
-{
-  return self[@(keyUInteger)];
-}
-
-- (id)diff_objectForUnicharKey:(unichar)aUnicharKey;
-{
-  return self[[NSString diff_stringFromUnichar:aUnicharKey]];
-}
-
-
-- (NSInteger)diff_integerForKey:(id)aKey;
-{
-  return ((NSNumber *)self[aKey]).integerValue;
-}
-
-- (NSUInteger)diff_unsignedIntegerForKey:(id)aKey;
-{
-  return ((NSNumber *)self[aKey]).unsignedIntegerValue;
-}
-
-- (NSInteger)diff_integerForIntegerKey:(NSInteger)keyInteger;
-{
-  return ((NSNumber *)self[@(keyInteger)]).integerValue;
-}
-
-- (NSUInteger)diff_unsignedIntegerForUnicharKey:(unichar)aUnicharKey;
-{
-  return ((NSNumber *)[self diff_objectForUnicharKey:aUnicharKey]).unsignedIntegerValue;
-}
-
-
-- (BOOL)diff_containsObjectForKey:(id)aKey;
-{
-  return (self[aKey] != nil);
-}
-
-- (BOOL)containsObjectForIntegerKey:(NSInteger)keyInteger;
-{
-  return (self[@(keyInteger)] != nil);
-}
-
-- (BOOL)diff_containsObjectForUnicharKey:(unichar)aUnicharKey;
-{
-  return ([self diff_objectForUnicharKey:aUnicharKey] != nil);
-}
-
-
-- (void)diff_setIntegerValue:(NSInteger)anInteger forKey:(id)aKey;
+- (void)diff_setIntegerValue:(NSInteger)anInteger forKey:(id)aKey
 {
   self[aKey] = @(anInteger);
 }
 
-- (void)diff_setIntegerValue:(NSInteger)anInteger forIntegerKey:(NSInteger)keyInteger;
+- (void)diff_setIntegerValue:(NSInteger)anInteger forIntegerKey:(NSInteger)keyInteger
 {
   self[@(keyInteger)] = @(anInteger);
 }
 
 
-- (void)diff_setUnsignedIntegerValue:(NSUInteger)anUInteger forKey:(id)aKey;
+- (void)diff_setUnsignedIntegerValue:(NSUInteger)anUInteger forKey:(id)aKey
 {
   self[aKey] = @(anUInteger);
 }
 
-- (void)diff_setUnsignedIntegerValue:(NSUInteger)anUInteger forUnsignedIntegerKey:(NSUInteger)keyUInteger;
+- (void)diff_setUnsignedIntegerValue:(NSUInteger)anUInteger forUnsignedIntegerKey:(NSUInteger)keyUInteger
 {
   self[@(keyUInteger)] = @(anUInteger);
 }
 
-- (void)diff_setUnsignedIntegerValue:(NSUInteger)anUInteger forUnicharKey:(unichar)aUnicharKey;
+- (void)diff_setUnsignedIntegerValue:(NSUInteger)anUInteger forUnicharKey:(unichar)aUnicharKey
 {
   self[[NSString diff_stringFromUnichar:aUnicharKey]] = @(anUInteger);
 }
