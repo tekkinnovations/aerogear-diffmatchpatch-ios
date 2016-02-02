@@ -46,7 +46,6 @@
   // Whole case.
   XCTAssertEqual((NSUInteger)4, [dmp diff_commonPrefixOfFirstString:@"1234" andSecondString:@"1234xyz"], @"Common suffix whole case failed.");
 
-  [dmp release];
 }
 
 - (void)test_diff_commonSuffixTest {
@@ -62,7 +61,6 @@
   // Whole case.
   XCTAssertEqual((NSUInteger)4, [dmp diff_commonSuffixOfFirstString:@"1234" andSecondString:@"xyz1234"], @"Detect any common suffix. Whole case.");
 
-  [dmp release];
 }
 
 - (void)test_diff_commonOverlapTest {
@@ -86,7 +84,6 @@
   // component letters.  E.g. U+FB01 == 'fi'
   XCTAssertEqual((NSUInteger)0, [dmp diff_commonOverlapOfFirstString:@"fi" andSecondString:@"\U0000fb01i"], @"Detect any suffix/prefix overlap. Unicode.");
 
-  [dmp release];
 }
 
 - (void)test_diff_halfmatchTest {
@@ -131,7 +128,6 @@
   dmp.Diff_Timeout = 0;
   XCTAssertNil([dmp diff_halfMatchOfFirstString:@"qHilloHelloHew" andSecondString:@"xHelloHeHulloy"], @"Optimal no halfmatch.");
 
-  [dmp release];
 }
 
 - (void)test_diff_linesToCharsTest {
@@ -187,7 +183,6 @@
   XCTAssertEqualObjects(@"", [result objectAtIndex:1], @"More than 256 #4.");
   XCTAssertEqualObjects(tmpVector, (NSArray *)[result objectAtIndex:2], @"More than 256 #5.");
 
-  [dmp release];
 }
 
 - (void)test_diff_charsToLinesTest {
@@ -226,7 +221,6 @@
   [dmp diff_chars:diffs toLines:tmpVector];
   XCTAssertEqualObjects([NSArray arrayWithObject:[Diff diffWithOperation:OperationDiffDelete andText:lines]], diffs, @"More than 256 #3.");
 
-  [dmp release];
 }
 
 - (void)test_diff_cleanupMergeTest {
@@ -305,7 +299,6 @@
   expectedResult = [NSMutableArray arrayWithObjects:[Diff diffWithOperation:OperationDiffEqual andText:@"xca"], [Diff diffWithOperation:OperationDiffDelete andText:@"cba"], nil];
   XCTAssertEqualObjects(expectedResult, diffs, @"Slide edit right recursive.");
 
-  [dmp release];
 }
 
 - (void)test_diff_cleanupSemanticLosslessTest {
@@ -400,7 +393,6 @@
       [Diff diffWithOperation:OperationDiffEqual andText:@" The yyy."], nil];
   XCTAssertEqualObjects(expectedResult, diffs, @"Sentence boundaries.");
 
-  [dmp release];
 }
 
 - (void)test_diff_cleanupSemanticTest {
@@ -544,7 +536,6 @@
       [Diff diffWithOperation:OperationDiffInsert andText:@"BC"], nil];
   XCTAssertEqualObjects(expectedResult, diffs, @"Two overlap eliminations.");
 
-  [dmp release];
 }
 
 - (void)test_diff_cleanupEfficiencyTest {
@@ -629,7 +620,6 @@
   XCTAssertEqualObjects(expectedResult, diffs, @"High cost elimination.");
   dmp.Diff_EditCost = 4;
 
-  [dmp release];
 }
 
 - (void)test_diff_prettyHtmlTest {
@@ -643,7 +633,6 @@
   NSString *expectedResult = @"<span>a&para;<br></span><del style=\"background:#ffe6e6;\">&lt;B&gt;b&lt;/B&gt;</del><ins style=\"background:#e6ffe6;\">c&amp;d</ins>";
   XCTAssertEqualObjects(expectedResult, [dmp diff_prettyHtml:diffs], @"Pretty print.");
 
-  [dmp release];
 }
 
 - (void)test_diff_textTest {
@@ -662,7 +651,6 @@
 
   XCTAssertEqualObjects(@"jumped over a lazy", [dmp diff_text2:diffs], @"Compute the source and destination texts #2");
 
-  [dmp release];
 }
 
 - (void)test_diff_deltaTest {
@@ -741,7 +729,6 @@
   expectedResult = [dmp diff_fromDeltaWithText:@"" andDelta:delta error:NULL];
   XCTAssertEqualObjects(diffs, expectedResult, @"diff_fromDelta: Unchanged characters. Convert delta string into a diff.");
 
-  [dmp release];
 }
 
 - (void)test_diff_xIndexTest {
@@ -760,7 +747,6 @@
       [Diff diffWithOperation:OperationDiffEqual andText:@"xyz"], nil] /* Diff */;
   XCTAssertEqual((NSUInteger)1, [dmp diff_xIndexIn:diffs location:3], @"diff_xIndex: Translation on deletion.");
 
-  [dmp release];
 }
 
 - (void)test_diff_levenshteinTest {
@@ -784,7 +770,6 @@
       [Diff diffWithOperation:OperationDiffInsert andText:@"1234"], nil] /* Diff */;
   XCTAssertEqual((NSUInteger)7, [dmp diff_levenshtein:diffs], @"diff_levenshtein: Levenshtein with middle equality.");
 
-  [dmp release];
 }
 
 - (void)diff_bisectTest;
@@ -804,7 +789,6 @@
   diffs = [NSMutableArray arrayWithObjects:[Diff diffWithOperation:OperationDiffDelete andText:@"cat"], [Diff diffWithOperation:OperationDiffInsert andText:@"map"], nil];
   XCTAssertEqualObjects(diffs, [dmp diff_bisectOfOldString:a andNewString:b deadline:[[NSDate distantPast] timeIntervalSinceReferenceDate]], @"Bisect timeout.");
 
-  [dmp release];
 }
 
 - (void)test_diff_mainTest {
@@ -896,7 +880,6 @@
 
   // CHANGEME: Test null inputs
 
-  [dmp release];
 }
 
 
@@ -921,7 +904,6 @@
   [bitmask diff_setUnsignedIntegerValue:8 forUnicharKey:'c'];
   XCTAssertEqualObjects(bitmask, [dmp match_alphabet:@"abcaba"], @"match_alphabet: Duplicates.");
 
-  [dmp release];
 }
 
 - (void)test_match_bitapTest {
@@ -970,7 +952,6 @@
   dmp.Match_Distance = 1000;  // Loose location.
   XCTAssertEqual((NSUInteger)0, [dmp match_bitapOfText:@"abcdefghijklmnopqrstuvwxyz" andPattern:@"abcdefg" near:24], @"match_bitap: Distance test #3.");
 
-  [dmp release];
 }
 
 - (void)test_match_mainTest {
@@ -995,7 +976,6 @@
 
   // CHANGEME: Test null inputs
 
-  [dmp release];
 }
 
 
@@ -1005,7 +985,7 @@
 
 - (void)test_patch_patchObjTest {
   // Patch Object.
-  Patch *p = [[Patch new] autorelease];
+  Patch *p = [Patch new];
   p.start1 = 20;
   p.start2 = 21;
   p.length1 = 18;
@@ -1045,7 +1025,6 @@
   }
   error = nil;
 
-  [dmp release];
 }
 
 - (void)test_patch_toTextTest {
@@ -1060,7 +1039,6 @@
   patches = [dmp patch_fromText:strp error:NULL];
   XCTAssertEqualObjects(strp, [dmp patch_toText:patches], @"toText Test #2");
 
-  [dmp release];
 }
 
 - (void)test_patch_addContextTest {
@@ -1084,7 +1062,6 @@
   [dmp patch_addContextToPatch:p sourceText:@"The quick brown fox jumps.  The quick brown fox crashes."];
   XCTAssertEqualObjects(@"@@ -1,27 +1,28 @@\n Th\n-e\n+at\n  quick brown fox jumps. \n", [p description], @"patch_addContext: Ambiguity.");
 
-  [dmp release];
 }
 
 - (void)test_patch_makeTest {
@@ -1141,7 +1118,6 @@
 
   // CHANGEME: Test null inputs
 
-  [dmp release];
 }
 
 
@@ -1167,7 +1143,6 @@
   [dmp patch_splitMax:patches];
   XCTAssertEqualObjects(@"@@ -2,32 +2,32 @@\n bcdefghij , h : \n-0\n+1\n  , t : 1 abcdef\n@@ -29,32 +29,32 @@\n bcdefghij , h : \n-0\n+1\n  , t : 1 abcdef\n", [dmp patch_toText:patches], @"Assumes that Match_MaxBits is 32 #4");
 
-  [dmp release];
 }
 
 - (void)test_patch_addPaddingTest {
@@ -1201,7 +1176,6 @@
       [dmp patch_toText:patches],
       @"patch_addPadding: Both edges none.");
 
-  [dmp release];
 }
 
 - (void)test_patch_applyTest {
@@ -1291,7 +1265,6 @@
   resultStr = [NSString stringWithFormat:@"%@\t%@", [results objectAtIndex:0], stringForBOOL([boolArray objectAtIndex:0])];
   XCTAssertEqualObjects(@"x123\ttrue", resultStr, @"patch_apply: Edge partial match.");
 
-  [dmp release];
 }
 
 
