@@ -34,7 +34,9 @@
  */
 - (NSString *)diff_stringByAddingPercentEscapesForEncodeUriCompatibility;
 {
-    return [self stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSMutableCharacterSet *charset = [NSMutableCharacterSet characterSetWithCharactersInString:@" !~*'();/?:@&=+$,#"];
+    [charset formUnionWithCharacterSet: [NSCharacterSet URLQueryAllowedCharacterSet]];
+    return [self stringByAddingPercentEncodingWithAllowedCharacters: charset];
 }
 
 /**
