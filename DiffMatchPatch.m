@@ -422,7 +422,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  *     suffix of longtext, the prefix of shorttext, the suffix of shorttext
  *     and the common middle.  Or nil if there was no match.
  */
-- (NSArray *)diff_halfMatchIOfLongString:(NSString *)longtext
+- (NSArray * _Nullable)diff_halfMatchIOfLongString:(NSString *)longtext
                           andShortString:(NSString *)shorttext
                                    index:(NSInteger)index
 {
@@ -1316,7 +1316,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  * @param error NSError if invalid input.
  * @return NSMutableArray of Diff objects or nil if invalid.
  */
-- (NSArray<Diff *> *)diff_fromDeltaWithText:(NSString *)text1
+- (NSArray<Diff *> * _Nullable)diff_fromDeltaWithText:(NSString *)text1
                                   andDelta:(NSString *)delta
                                      error:(NSError **)error
 {
@@ -1913,7 +1913,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  * @param text2 New text.
  * @return an array of Patch objects.
  */
-- (NSArray<Patch *> *)patch_makeFromOldString:(NSString *)text1
+- (NSArray<Patch *> * _Nullable)patch_makeFromOldString:(NSString *)text1
                                andNewString:(NSString *)text2;
 {
   // Check for null inputs.
@@ -1938,7 +1938,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  * @param diffs an array of Diff objects for text1 to text2.
  * @return an array of Patch objects.
  */
-- (NSArray<Patch *> *)patch_makeFromDiffs:(NSArray<Diff *> *)diffs;
+- (NSArray<Patch *> * _Nullable)patch_makeFromDiffs:(NSArray<Diff *> *)diffs;
 {
   // Check for nil inputs not needed since nil can't be passed in C#.
   // No origin NSString *provided, comAdde our own.
@@ -1955,7 +1955,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  * @return an array of Patch objects.
  * @deprecated Prefer -patch_makeFromOldString:diffs:.
  */
-- (NSArray<Patch *> *)patch_makeFromOldString:(NSString *)text1
+- (NSArray<Patch *> * _Nullable)patch_makeFromOldString:(NSString *)text1
                                   newString:(NSString *)text2
                                       diffs:(NSArray<Diff *> *)diffs;
 {
@@ -1975,7 +1975,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  * @param diffs an array of Diff objects for text1 to text2.
  * @return an array of Patch objects.
  */
-- (NSArray<Patch *> *)patch_makeFromOldString:(NSString *)text1
+- (NSArray<Patch *> * _Nullable)patch_makeFromOldString:(NSString *)text1
                                    andDiffs:(NSArray<Diff *> *)diffs;
 {
   // Check for null inputs.
@@ -2196,7 +2196,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
 /**
  * Add some padding on text start and end so that edges can match something.
  * Intended to be called only from within patch_apply.
- * @param patches NSMutableArray of Patch objects.
+ * @param patches Array of Patch objects.
  * @return The padding NSString added to each side.
  */
 - (NSString *)patch_addPadding:(NSArray<Patch *> *)patches;
@@ -2381,7 +2381,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  * @param error NSError if invalid input.
  * @return an array of Patch objects.
  */
-- (NSArray<Patch *> *)patch_fromText:(NSString *)textline
+- (NSArray<Patch *> * _Nullable)patch_fromText:(NSString *)textline
                              error:(NSError **)error;
 {
   NSMutableArray *patches = [NSMutableArray array];

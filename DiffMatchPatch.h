@@ -112,21 +112,21 @@ typedef NS_ENUM(NSInteger, Operation) {
 - (NSString *)diff_text2:(NSArray<Diff *> *)diffs;
 - (NSUInteger)diff_levenshtein:(NSArray<Diff *> *)diffs;
 - (NSString *)diff_toDelta:(NSArray<Diff *> *)diffs;
-- (NSArray<Diff *> *)diff_fromDeltaWithText:(NSString *)text1 andDelta:(NSString *)delta error:(NSError **)error;
+- (NSArray<Diff *> * _Nullable)diff_fromDeltaWithText:(NSString *)text1 andDelta:(NSString *)delta error:(NSError **)error;
 
 - (NSUInteger)match_mainForText:(NSString *)text pattern:(NSString *)pattern near:(NSUInteger)loc;
 - (NSDictionary<NSString *,NSNumber *> *)match_alphabet:(NSString *)pattern;
 
-- (NSArray<Patch *> *)patch_makeFromOldString:(NSString *)text1 andNewString:(NSString *)text2;
-- (NSArray<Patch *> *)patch_makeFromDiffs:(NSArray<Diff *> *)diffs;
-- (NSArray<Patch *> *)patch_makeFromOldString:(NSString *)text1 newString:(NSString *)text2 diffs:(NSArray<Diff *> *)diffs;
-- (NSArray<Patch *> *)patch_makeFromOldString:(NSString *)text1 andDiffs:(NSArray<Diff *> *)diffs;
+- (NSArray<Patch *> * _Nullable)patch_makeFromOldString:(NSString *)text1 andNewString:(NSString *)text2;
+- (NSArray<Patch *> * _Nullable)patch_makeFromDiffs:(NSArray<Diff *> *)diffs;
+- (NSArray<Patch *> * _Nullable)patch_makeFromOldString:(NSString *)text1 newString:(NSString *)text2 diffs:(NSArray<Diff *> *)diffs;
+- (NSArray<Patch *> * _Nullable)patch_makeFromOldString:(NSString *)text1 andDiffs:(NSArray<Diff *> *)diffs;
 - (NSArray<Patch *> *)patch_deepCopy:(NSArray<Patch *> *)patches; // Copy rule applies!
 - (NSArray *)patch_apply:(NSArray<Patch *> *)sourcePatches toString:(NSString *)text;
 - (NSString *)patch_addPadding:(NSArray<Patch *> *)patches;
 - (NSArray<Patch *> *)patch_splitMax:(NSArray<Patch *> *)patches;
 - (NSString *)patch_toText:(NSArray<Patch *> *)patches;
-- (NSArray<Patch *> *)patch_fromText:(NSString *)textline error:(NSError **)error;
+- (NSArray<Patch *> * _Nullable)patch_fromText:(NSString *)textline error:(NSError **)error;
 
 @end
 
@@ -143,7 +143,7 @@ typedef NS_ENUM(NSInteger, Operation) {
 - (NSMutableArray *)diff_bisectSplitOfOldString:(NSString *)text1 andNewString:(NSString *)text2 x:(NSUInteger)x y:(NSUInteger)y deadline:(NSTimeInterval)deadline;
 - (NSUInteger)diff_commonOverlapOfFirstString:(NSString *)text1 andSecondString:(NSString *)text2;
 - (NSArray *)diff_halfMatchOfFirstString:(NSString *)text1 andSecondString:(NSString *)text2;
-- (NSArray *)diff_halfMatchIOfLongString:(NSString *)longtext andShortString:(NSString *)shorttext;
+- (NSArray * _Nullable)diff_halfMatchIOfLongString:(NSString *)longtext andShortString:(NSString *)shorttext;
 - (NSInteger)diff_cleanupSemanticScoreOfFirstString:(NSString *)one andSecondString:(NSString *)two;
 
 - (NSUInteger)match_bitapOfText:(NSString *)text andPattern:(NSString *)pattern near:(NSUInteger)loc;
