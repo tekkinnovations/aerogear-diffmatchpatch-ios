@@ -48,7 +48,7 @@
  */
 - (NSString *)diff_stringByReplacingPercentEscapesForEncodeUriCompatibility;
 {
-    return [self stringByRemovingPercentEncoding];
+    return self.stringByRemovingPercentEncoding;
 }
 
 @end

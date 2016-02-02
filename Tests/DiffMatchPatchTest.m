@@ -97,31 +97,31 @@
   XCTAssertNil([dmp diff_halfMatchOfFirstString:@"12345" andSecondString:@"23"], @"No match #2.");
 
   // Single Match.
-  expectedResult = [NSArray arrayWithObjects:@"12", @"90", @"a", @"z", @"345678", nil];
+  expectedResult = @[@"12", @"90", @"a", @"z", @"345678"];
   XCTAssertEqualObjects(expectedResult, [dmp diff_halfMatchOfFirstString:@"1234567890" andSecondString:@"a345678z"], @"Single Match #1.");
 
-  expectedResult = [NSArray arrayWithObjects:@"a", @"z", @"12", @"90", @"345678", nil];
+  expectedResult = @[@"a", @"z", @"12", @"90", @"345678"];
   XCTAssertEqualObjects(expectedResult, [dmp diff_halfMatchOfFirstString:@"a345678z" andSecondString:@"1234567890"], @"Single Match #2.");
 
-  expectedResult = [NSArray arrayWithObjects:@"abc", @"z", @"1234", @"0", @"56789", nil];
+  expectedResult = @[@"abc", @"z", @"1234", @"0", @"56789"];
   XCTAssertEqualObjects(expectedResult, [dmp diff_halfMatchOfFirstString:@"abc56789z" andSecondString:@"1234567890"], @"Single Match #3.");
 
-  expectedResult = [NSArray arrayWithObjects:@"a", @"xyz", @"1", @"7890", @"23456", nil];
+  expectedResult = @[@"a", @"xyz", @"1", @"7890", @"23456"];
   XCTAssertEqualObjects(expectedResult, [dmp diff_halfMatchOfFirstString:@"a23456xyz" andSecondString:@"1234567890"], @"Single Match #4.");
 
   // Multiple Matches.
-  expectedResult = [NSArray arrayWithObjects:@"12123", @"123121", @"a", @"z", @"1234123451234", nil];
+  expectedResult = @[@"12123", @"123121", @"a", @"z", @"1234123451234"];
   XCTAssertEqualObjects(expectedResult, [dmp diff_halfMatchOfFirstString:@"121231234123451234123121" andSecondString:@"a1234123451234z"], @"Multiple Matches #1.");
 
-  expectedResult = [NSArray arrayWithObjects:@"", @"-=-=-=-=-=", @"x", @"", @"x-=-=-=-=-=-=-=", nil];
+  expectedResult = @[@"", @"-=-=-=-=-=", @"x", @"", @"x-=-=-=-=-=-=-="];
   XCTAssertEqualObjects(expectedResult, [dmp diff_halfMatchOfFirstString:@"x-=-=-=-=-=-=-=-=-=-=-=-=" andSecondString:@"xx-=-=-=-=-=-=-="], @"Multiple Matches #2.");
 
-  expectedResult = [NSArray arrayWithObjects:@"-=-=-=-=-=", @"", @"", @"y", @"-=-=-=-=-=-=-=y", nil];
+  expectedResult = @[@"-=-=-=-=-=", @"", @"", @"y", @"-=-=-=-=-=-=-=y"];
   XCTAssertEqualObjects(expectedResult, [dmp diff_halfMatchOfFirstString:@"-=-=-=-=-=-=-=-=-=-=-=-=y" andSecondString:@"-=-=-=-=-=-=-=yy"], @"Multiple Matches #3.");
 
   // Non-optimal halfmatch.
   // Optimal diff would be -q+x=H-i+e=lloHe+Hu=llo-Hew+y not -qHillo+x=HelloHe-w+Hulloy
-  expectedResult = [NSArray arrayWithObjects:@"qHillo", @"w", @"x", @"Hulloy", @"HelloHe", nil];
+  expectedResult = @[@"qHillo", @"w", @"x", @"Hulloy", @"HelloHe"];
   XCTAssertEqualObjects(expectedResult, [dmp diff_halfMatchOfFirstString:@"qHilloHelloHew" andSecondString:@"xHelloHeHulloy"], @"Non-optimal halfmatch.");
 
   // Optimal no halfmatch.
@@ -140,9 +140,9 @@
   [tmpVector addObject:@"alpha\n"];
   [tmpVector addObject:@"beta\n"];
   result = [dmp diff_linesToCharsForFirstString:@"alpha\nbeta\nalpha\n" andSecondString:@"beta\nalpha\nbeta\n"];
-  XCTAssertEqualObjects(@"\001\002\001", [result objectAtIndex:0], @"Shared lines #1.");
-  XCTAssertEqualObjects(@"\002\001\002", [result objectAtIndex:1], @"Shared lines #2.");
-  XCTAssertEqualObjects(tmpVector, (NSArray *)[result objectAtIndex:2], @"Shared lines #3.");
+  XCTAssertEqualObjects(@"\001\002\001", result[0], @"Shared lines #1.");
+  XCTAssertEqualObjects(@"\002\001\002", result[1], @"Shared lines #2.");
+  XCTAssertEqualObjects(tmpVector, (NSArray *)result[2], @"Shared lines #3.");
 
   [tmpVector removeAllObjects];
   [tmpVector addObject:@""];
@@ -150,18 +150,18 @@
   [tmpVector addObject:@"beta\r\n"];
   [tmpVector addObject:@"\r\n"];
   result = [dmp diff_linesToCharsForFirstString:@"" andSecondString:@"alpha\r\nbeta\r\n\r\n\r\n"];
-  XCTAssertEqualObjects(@"", [result objectAtIndex:0], @"Empty string and blank lines #1.");
-  XCTAssertEqualObjects(@"\001\002\003\003", [result objectAtIndex:1], @"Empty string and blank lines #2.");
-  XCTAssertEqualObjects(tmpVector, (NSArray *)[result objectAtIndex:2], @"Empty string and blank lines #3.");
+  XCTAssertEqualObjects(@"", result[0], @"Empty string and blank lines #1.");
+  XCTAssertEqualObjects(@"\001\002\003\003", result[1], @"Empty string and blank lines #2.");
+  XCTAssertEqualObjects(tmpVector, (NSArray *)result[2], @"Empty string and blank lines #3.");
 
   [tmpVector removeAllObjects];
   [tmpVector addObject:@""];
   [tmpVector addObject:@"a"];
   [tmpVector addObject:@"b"];
   result = [dmp diff_linesToCharsForFirstString:@"a" andSecondString:@"b"];
-  XCTAssertEqualObjects(@"\001", [result objectAtIndex:0], @"No linebreaks #1.");
-  XCTAssertEqualObjects(@"\002", [result objectAtIndex:1], @"No linebreaks #2.");
-  XCTAssertEqualObjects(tmpVector, (NSArray *)[result objectAtIndex:2], @"No linebreaks #3.");
+  XCTAssertEqualObjects(@"\001", result[0], @"No linebreaks #1.");
+  XCTAssertEqualObjects(@"\002", result[1], @"No linebreaks #2.");
+  XCTAssertEqualObjects(tmpVector, (NSArray *)result[2], @"No linebreaks #3.");
 
   // More than 256 to reveal any 8-bit limitations.
   unichar n = 300;
@@ -179,9 +179,9 @@
   XCTAssertEqual((NSUInteger)n, chars.length, @"More than 256 #2.");
   [tmpVector insertObject:@"" atIndex:0];
   result = [dmp diff_linesToCharsForFirstString:lines andSecondString:@""];
-  XCTAssertEqualObjects(chars, [result objectAtIndex:0], @"More than 256 #3.");
-  XCTAssertEqualObjects(@"", [result objectAtIndex:1], @"More than 256 #4.");
-  XCTAssertEqualObjects(tmpVector, (NSArray *)[result objectAtIndex:2], @"More than 256 #5.");
+  XCTAssertEqualObjects(chars, result[0], @"More than 256 #3.");
+  XCTAssertEqualObjects(@"", result[1], @"More than 256 #4.");
+  XCTAssertEqualObjects(tmpVector, (NSArray *)result[2], @"More than 256 #5.");
 
 }
 
@@ -189,17 +189,15 @@
   DiffMatchPatch *dmp = [DiffMatchPatch new];
 
   // Convert chars up to lines.
-  NSArray *diffs = [NSArray arrayWithObjects:
-      [Diff diffWithOperation:OperationDiffEqual andText:@"\001\002\001"],
-      [Diff diffWithOperation:OperationDiffInsert andText:@"\002\001\002"], nil];
+  NSArray *diffs = @[[Diff diffWithOperation:OperationDiffEqual andText:@"\001\002\001"],
+      [Diff diffWithOperation:OperationDiffInsert andText:@"\002\001\002"]];
   NSMutableArray *tmpVector = [NSMutableArray array]; // Array of NSString objects.
   [tmpVector addObject:@""];
   [tmpVector addObject:@"alpha\n"];
   [tmpVector addObject:@"beta\n"];
   [dmp diff_chars:diffs toLines:tmpVector];
-  NSArray *expectedResult = [NSArray arrayWithObjects:
-      [Diff diffWithOperation:OperationDiffEqual andText:@"alpha\nbeta\nalpha\n"],
-      [Diff diffWithOperation:OperationDiffInsert andText:@"beta\nalpha\nbeta\n"], nil];
+  NSArray *expectedResult = @[[Diff diffWithOperation:OperationDiffEqual andText:@"alpha\nbeta\nalpha\n"],
+      [Diff diffWithOperation:OperationDiffInsert andText:@"beta\nalpha\nbeta\n"]];
   XCTAssertEqualObjects(expectedResult, diffs, @"Shared lines.");
 
   // More than 256 to reveal any 8-bit limitations.
@@ -217,9 +215,9 @@
   XCTAssertEqual((NSUInteger)n, tmpVector.count, @"More than 256 #1.");
   XCTAssertEqual((NSUInteger)n, chars.length, @"More than 256 #2.");
   [tmpVector insertObject:@"" atIndex:0];
-  diffs = [NSArray arrayWithObject:[Diff diffWithOperation:OperationDiffDelete andText:chars]];
+  diffs = @[[Diff diffWithOperation:OperationDiffDelete andText:chars]];
   [dmp diff_chars:diffs toLines:tmpVector];
-  XCTAssertEqualObjects([NSArray arrayWithObject:[Diff diffWithOperation:OperationDiffDelete andText:lines]], diffs, @"More than 256 #3.");
+  XCTAssertEqualObjects(@[[Diff diffWithOperation:OperationDiffDelete andText:lines]], diffs, @"More than 256 #3.");
 
 }
 
@@ -1008,13 +1006,13 @@
   XCTAssertTrue(((NSMutableArray *)[dmp patch_fromText:@"" error:NULL]).count == 0, @"patch_fromText: #0.");
 
   NSString *strp = @"@@ -21,18 +22,17 @@\n jump\n-s\n+ed\n  over \n-the\n+a\n %0Alaz\n";
-  XCTAssertEqualObjects(strp, [[[dmp patch_fromText:strp error:NULL] objectAtIndex:0] description], @"patch_fromText: #1.");
+  XCTAssertEqualObjects(strp, [[dmp patch_fromText:strp error:NULL][0] description], @"patch_fromText: #1.");
 
-  XCTAssertEqualObjects(@"@@ -1 +1 @@\n-a\n+b\n", [[[dmp patch_fromText:@"@@ -1 +1 @@\n-a\n+b\n" error:NULL] objectAtIndex:0] description], @"patch_fromText: #2.");
+  XCTAssertEqualObjects(@"@@ -1 +1 @@\n-a\n+b\n", [[dmp patch_fromText:@"@@ -1 +1 @@\n-a\n+b\n" error:NULL][0] description], @"patch_fromText: #2.");
 
-  XCTAssertEqualObjects(@"@@ -1,3 +0,0 @@\n-abc\n", [[[dmp patch_fromText:@"@@ -1,3 +0,0 @@\n-abc\n" error:NULL] objectAtIndex:0] description], @"patch_fromText: #3.");
+  XCTAssertEqualObjects(@"@@ -1,3 +0,0 @@\n-abc\n", [[dmp patch_fromText:@"@@ -1,3 +0,0 @@\n-abc\n" error:NULL][0] description], @"patch_fromText: #3.");
 
-  XCTAssertEqualObjects(@"@@ -0,0 +1,3 @@\n+abc\n", [[[dmp patch_fromText:@"@@ -0,0 +1,3 @@\n+abc\n" error:NULL] objectAtIndex:0] description], @"patch_fromText: #4.");
+  XCTAssertEqualObjects(@"@@ -0,0 +1,3 @@\n+abc\n", [[dmp patch_fromText:@"@@ -0,0 +1,3 @@\n+abc\n" error:NULL][0] description], @"patch_fromText: #4.");
 
   // Generates error.
   NSError *error = nil;
@@ -1046,19 +1044,19 @@
 
   dmp.Patch_Margin = 4;
   Patch *p;
-  p = [[dmp patch_fromText:@"@@ -21,4 +21,10 @@\n-jump\n+somersault\n" error:NULL] objectAtIndex:0];
+  p = [dmp patch_fromText:@"@@ -21,4 +21,10 @@\n-jump\n+somersault\n" error:NULL][0];
   [dmp patch_addContextToPatch:p sourceText:@"The quick brown fox jumps over the lazy dog."];
   XCTAssertEqualObjects(@"@@ -17,12 +17,18 @@\n fox \n-jump\n+somersault\n s ov\n", [p description], @"patch_addContext: Simple case.");
 
-  p = [[dmp patch_fromText:@"@@ -21,4 +21,10 @@\n-jump\n+somersault\n" error:NULL] objectAtIndex:0];
+  p = [dmp patch_fromText:@"@@ -21,4 +21,10 @@\n-jump\n+somersault\n" error:NULL][0];
   [dmp patch_addContextToPatch:p sourceText:@"The quick brown fox jumps."];
   XCTAssertEqualObjects(@"@@ -17,10 +17,16 @@\n fox \n-jump\n+somersault\n s.\n", [p description], @"patch_addContext: Not enough trailing context.");
 
-  p = [[dmp patch_fromText:@"@@ -3 +3,2 @@\n-e\n+at\n" error:NULL] objectAtIndex:0];
+  p = [dmp patch_fromText:@"@@ -3 +3,2 @@\n-e\n+at\n" error:NULL][0];
   [dmp patch_addContextToPatch:p sourceText:@"The quick brown fox jumps."];
   XCTAssertEqualObjects(@"@@ -1,7 +1,8 @@\n Th\n-e\n+at\n  qui\n", [p description], @"patch_addContext: Not enough leading context.");
 
-  p = [[dmp patch_fromText:@"@@ -3 +3,2 @@\n-e\n+at\n" error:NULL] objectAtIndex:0];
+  p = [dmp patch_fromText:@"@@ -3 +3,2 @@\n-e\n+at\n" error:NULL][0];
   [dmp patch_addContextToPatch:p sourceText:@"The quick brown fox jumps.  The quick brown fox crashes."];
   XCTAssertEqualObjects(@"@@ -1,27 +1,28 @@\n Th\n-e\n+at\n  quick brown fox jumps. \n", [p description], @"patch_addContext: Ambiguity.");
 
@@ -1101,7 +1099,7 @@
       [Diff diffWithOperation:OperationDiffDelete andText:@"`1234567890-=[]\\;',./"],
       [Diff diffWithOperation:OperationDiffInsert andText:@"~!@#$%^&*()_+{}|:\"<>?"], nil];
   XCTAssertEqualObjects(diffs,
-      ((Patch *)[[dmp patch_fromText:@"@@ -1,21 +1,21 @@\n-%601234567890-=%5B%5D%5C;',./\n+~!@#$%25%5E&*()_+%7B%7D%7C:%22%3C%3E?\n" error:NULL] objectAtIndex:0]).diffs,
+      ((Patch *)[dmp patch_fromText:@"@@ -1,21 +1,21 @@\n-%601234567890-=%5B%5D%5C;',./\n+~!@#$%25%5E&*()_+%7B%7D%7C:%22%3C%3E?\n" error:NULL][0]).diffs,
       @"patch_fromText: Character decoding.");
 
   NSMutableString *text1Mutable = [NSMutableString string];
@@ -1187,43 +1185,43 @@
   NSMutableArray *patches;
   patches = [dmp patch_makeFromOldString:@"" andNewString:@""];
   NSArray *results = [dmp patch_apply:patches toString:@"Hello world."];
-  NSMutableArray *boolArray = [results objectAtIndex:1];
-  NSString *resultStr = [NSString stringWithFormat:@"%@\t%lu", [results objectAtIndex:0], (unsigned long)boolArray.count];
+  NSMutableArray *boolArray = results[1];
+  NSString *resultStr = [NSString stringWithFormat:@"%@\t%lu", results[0], (unsigned long)boolArray.count];
   XCTAssertEqualObjects(@"Hello world.\t0", resultStr, @"patch_apply: Null case.");
 
   patches = [dmp patch_makeFromOldString:@"The quick brown fox jumps over the lazy dog." andNewString:@"That quick brown fox jumped over a lazy dog."];
   results = [dmp patch_apply:patches toString:@"The quick brown fox jumps over the lazy dog."];
-  boolArray = [results objectAtIndex:1];
-  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", [results objectAtIndex:0], stringForBOOL([boolArray objectAtIndex:0]), stringForBOOL([boolArray objectAtIndex:1])];
+  boolArray = results[1];
+  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", results[0], stringForBOOL(boolArray[0]), stringForBOOL(boolArray[1])];
   XCTAssertEqualObjects(@"That quick brown fox jumped over a lazy dog.\ttrue\ttrue", resultStr, @"patch_apply: Exact match.");
 
   results = [dmp patch_apply:patches toString:@"The quick red rabbit jumps over the tired tiger."];
-  boolArray = [results objectAtIndex:1];
-  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", [results objectAtIndex:0], stringForBOOL([boolArray objectAtIndex:0]), stringForBOOL([boolArray objectAtIndex:1])];
+  boolArray = results[1];
+  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", results[0], stringForBOOL(boolArray[0]), stringForBOOL(boolArray[1])];
   XCTAssertEqualObjects(@"That quick red rabbit jumped over a tired tiger.\ttrue\ttrue", resultStr, @"patch_apply: Partial match.");
 
   results = [dmp patch_apply:patches toString:@"I am the very model of a modern major general."];
-  boolArray = [results objectAtIndex:1];
-  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", [results objectAtIndex:0], stringForBOOL([boolArray objectAtIndex:0]), stringForBOOL([boolArray objectAtIndex:1])];
+  boolArray = results[1];
+  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", results[0], stringForBOOL(boolArray[0]), stringForBOOL(boolArray[1])];
   XCTAssertEqualObjects(@"I am the very model of a modern major general.\tfalse\tfalse", resultStr, @"patch_apply: Failed match.");
 
   patches = [dmp patch_makeFromOldString:@"x1234567890123456789012345678901234567890123456789012345678901234567890y" andNewString:@"xabcy"];
   results = [dmp patch_apply:patches toString:@"x123456789012345678901234567890-----++++++++++-----123456789012345678901234567890y"];
-  boolArray = [results objectAtIndex:1];
-  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", [results objectAtIndex:0], stringForBOOL([boolArray objectAtIndex:0]), stringForBOOL([boolArray objectAtIndex:1])];
+  boolArray = results[1];
+  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", results[0], stringForBOOL(boolArray[0]), stringForBOOL(boolArray[1])];
   XCTAssertEqualObjects(@"xabcy\ttrue\ttrue", resultStr, @"patch_apply: Big delete, small change.");
 
   patches = [dmp patch_makeFromOldString:@"x1234567890123456789012345678901234567890123456789012345678901234567890y" andNewString:@"xabcy"];
   results = [dmp patch_apply:patches toString:@"x12345678901234567890---------------++++++++++---------------12345678901234567890y"];
-  boolArray = [results objectAtIndex:1];
-  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", [results objectAtIndex:0], stringForBOOL([boolArray objectAtIndex:0]), stringForBOOL([boolArray objectAtIndex:1])];
+  boolArray = results[1];
+  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", results[0], stringForBOOL(boolArray[0]), stringForBOOL(boolArray[1])];
   XCTAssertEqualObjects(@"xabc12345678901234567890---------------++++++++++---------------12345678901234567890y\tfalse\ttrue", resultStr, @"patch_apply: Big delete, big change 1.");
 
   dmp.Patch_DeleteThreshold = 0.6f;
   patches = [dmp patch_makeFromOldString:@"x1234567890123456789012345678901234567890123456789012345678901234567890y" andNewString:@"xabcy"];
   results = [dmp patch_apply:patches toString:@"x12345678901234567890---------------++++++++++---------------12345678901234567890y"];
-  boolArray = [results objectAtIndex:1];
-  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", [results objectAtIndex:0], stringForBOOL([boolArray objectAtIndex:0]), stringForBOOL([boolArray objectAtIndex:1])];
+  boolArray = results[1];
+  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", results[0], stringForBOOL(boolArray[0]), stringForBOOL(boolArray[1])];
   XCTAssertEqualObjects(@"xabcy\ttrue\ttrue", resultStr, @"patch_apply: Big delete, big change 2.");
   dmp.Patch_DeleteThreshold = 0.5f;
 
@@ -1231,8 +1229,8 @@
   dmp.Match_Distance = 0;
   patches = [dmp patch_makeFromOldString:@"abcdefghijklmnopqrstuvwxyz--------------------1234567890" andNewString:@"abcXXXXXXXXXXdefghijklmnopqrstuvwxyz--------------------1234567YYYYYYYYYY890"];
   results = [dmp patch_apply:patches toString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZ--------------------1234567890"];
-  boolArray = [results objectAtIndex:1];
-  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", [results objectAtIndex:0], stringForBOOL([boolArray objectAtIndex:0]), stringForBOOL([boolArray objectAtIndex:1])];
+  boolArray = results[1];
+  resultStr = [NSString stringWithFormat:@"%@\t%@\t%@", results[0], stringForBOOL(boolArray[0]), stringForBOOL(boolArray[1])];
   XCTAssertEqualObjects(@"ABCDEFGHIJKLMNOPQRSTUVWXYZ--------------------1234567YYYYYYYYYY890\tfalse\ttrue", resultStr, @"patch_apply: Compensate for failed patch.");
   dmp.Match_Threshold = 0.5f;
   dmp.Match_Distance = 1000;
@@ -1249,20 +1247,20 @@
 
   patches = [dmp patch_makeFromOldString:@"" andNewString:@"test"];
   results = [dmp patch_apply:patches toString:@""];
-  boolArray = [results objectAtIndex:1];
-  resultStr = [NSString stringWithFormat:@"%@\t%@", [results objectAtIndex:0], stringForBOOL([boolArray objectAtIndex:0])];
+  boolArray = results[1];
+  resultStr = [NSString stringWithFormat:@"%@\t%@", results[0], stringForBOOL(boolArray[0])];
   XCTAssertEqualObjects(@"test\ttrue", resultStr, @"patch_apply: Edge exact match.");
 
   patches = [dmp patch_makeFromOldString:@"XY" andNewString:@"XtestY"];
   results = [dmp patch_apply:patches toString:@"XY"];
-  boolArray = [results objectAtIndex:1];
-  resultStr = [NSString stringWithFormat:@"%@\t%@", [results objectAtIndex:0], stringForBOOL([boolArray objectAtIndex:0])];
+  boolArray = results[1];
+  resultStr = [NSString stringWithFormat:@"%@\t%@", results[0], stringForBOOL(boolArray[0])];
   XCTAssertEqualObjects(@"XtestY\ttrue", resultStr, @"patch_apply: Near edge exact match.");
 
   patches = [dmp patch_makeFromOldString:@"y" andNewString:@"y123"];
   results = [dmp patch_apply:patches toString:@"x"];
-  boolArray = [results objectAtIndex:1];
-  resultStr = [NSString stringWithFormat:@"%@\t%@", [results objectAtIndex:0], stringForBOOL([boolArray objectAtIndex:0])];
+  boolArray = results[1];
+  resultStr = [NSString stringWithFormat:@"%@\t%@", results[0], stringForBOOL(boolArray[0])];
   XCTAssertEqualObjects(@"x123\ttrue", resultStr, @"patch_apply: Edge partial match.");
 
 }
@@ -1277,10 +1275,10 @@
   NSArray *text = [NSMutableArray arrayWithObjects:[NSMutableString string], [NSMutableString string], nil];
   for (Diff *myDiff in diffs) {
     if (myDiff.operation != OperationDiffInsert) {
-      [[text objectAtIndex:0] appendString:myDiff.text];
+      [text[0] appendString:myDiff.text];
     }
     if (myDiff.operation != OperationDiffDelete) {
-      [[text objectAtIndex:1] appendString:myDiff.text];
+      [text[1] appendString:myDiff.text];
     }
   }
   return text;

@@ -24,6 +24,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 /*
  * Functions for diff, match and patch.
  * Computes the difference between two texts to create a patch.
@@ -48,32 +49,21 @@ typedef NS_ENUM(NSInteger, Operation) {
 /*
  * Class representing one diff operation.
  */
-@interface Diff : NSObject <NSCopying> {
-  Operation operation;  // One of: DIFF_INSERT, DIFF_DELETE or DIFF_EQUAL.
-  NSString *text;      // The text associated with this diff operation.
-}
+@interface Diff : NSObject <NSCopying>
+@property (nonatomic, assign) Operation operation; // One of: DIFF_INSERT, DIFF_DELETE or DIFF_EQUAL.
+@property (nonatomic, copy) NSString *text; // The text associated with this diff operation.
 
-@property (nonatomic, assign) Operation operation;
-@property (nonatomic, copy) NSString *text;
++ (instancetype)diffWithOperation:(Operation)anOperation andText:(NSString *)aText;
 
-+ (id)diffWithOperation:(Operation)anOperation andText:(NSString *)aText;
-
-- (id)initWithOperation:(Operation)anOperation andText:(NSString *)aText;
+- (instancetype)initWithOperation:(Operation)anOperation andText:(NSString *)aText;
 
 @end
 
 /*
  * Class representing one patch operation.
  */
-@interface Patch : NSObject <NSCopying> {
-  NSMutableArray *diffs;
-  NSUInteger start1;
-  NSUInteger start2;
-  NSUInteger length1;
-  NSUInteger length2;
-}
-
-@property (nonatomic, retain) NSMutableArray *diffs;
+@interface Patch : NSObject <NSCopying>
+@property (nonatomic, retain) NSMutableArray<Diff *> *diffs;
 @property (nonatomic, assign) NSUInteger start1;
 @property (nonatomic, assign) NSUInteger start2;
 @property (nonatomic, assign) NSUInteger length1;
@@ -87,38 +77,25 @@ typedef NS_ENUM(NSInteger, Operation) {
  * Also Contains the behaviour settings.
  */
 @interface DiffMatchPatch : NSObject {
-  // Number of seconds to map a diff before giving up (0 for infinity).
-  NSTimeInterval Diff_Timeout;
-
-  // Cost of an empty edit operation in terms of edit characters.
-  NSUInteger Diff_EditCost;
-
-  // At what point is no match declared (0.0 = perfection, 1.0 = very loose).
-  double Match_Threshold;
-
-  // How far to search for a match (0 = exact location, 1000+ = broad match).
-  // A match this many characters away from the expected location will add
-  // 1.0 to the score (0.0 is a perfect match).
-  NSInteger Match_Distance;
-
-  // When deleting a large block of text (over ~64 characters), how close
-  // do the contents have to be to match the expected contents. (0.0 =
-  // perfection, 1.0 = very loose).  Note that Match_Threshold controls
-  // how closely the end points of a delete need to match.
-  float Patch_DeleteThreshold;
-
-  // Chunk size for context length.
-  uint16_t Patch_Margin;
-
   // The number of bits in an int.
   NSUInteger Match_MaxBits;
 }
-
+// Number of seconds to map a diff before giving up (0 for infinity).
 @property (nonatomic, assign) NSTimeInterval Diff_Timeout;
+// Cost of an empty edit operation in terms of edit characters.
 @property (nonatomic, assign) NSUInteger Diff_EditCost;
+// At what point is no match declared (0.0 = perfection, 1.0 = very loose).
 @property (nonatomic, assign) double Match_Threshold;
+// How far to search for a match (0 = exact location, 1000+ = broad match).
+// A match this many characters away from the expected location will add
+// 1.0 to the score (0.0 is a perfect match).
 @property (nonatomic, assign) NSInteger Match_Distance;
+// When deleting a large block of text (over ~64 characters), how close
+// do the contents have to be to match the expected contents. (0.0 =
+// perfection, 1.0 = very loose).  Note that Match_Threshold controls
+// how closely the end points of a delete need to match.
 @property (nonatomic, assign) float Patch_DeleteThreshold;
+// Chunk size for context length.
 @property (nonatomic, assign) uint16_t Patch_Margin;
 
 - (NSMutableArray *)diff_mainOfOldString:(NSString *)text1 andNewString:(NSString *)text2;
@@ -175,5 +152,7 @@ typedef NS_ENUM(NSInteger, Operation) {
 - (void)patch_addContextToPatch:(Patch *)patch sourceText:(NSString *)text;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif
