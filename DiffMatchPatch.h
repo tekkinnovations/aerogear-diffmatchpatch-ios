@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, Operation) {
 - (NSArray<Patch *> *)patch_deepCopy:(NSArray<Patch *> *)patches; // Copy rule applies!
 - (NSArray *)patch_apply:(NSArray<Patch *> *)sourcePatches toString:(NSString *)text;
 - (NSString *)patch_addPadding:(NSArray<Patch *> *)patches;
-- (NSArray<Patch *> *)patch_splitMax:(NSArray<Patch *> *)immutablePatches;
+- (NSArray<Patch *> *)patch_splitMax:(NSArray<Patch *> *)patches;
 - (NSString *)patch_toText:(NSArray<Patch *> *)patches;
 - (NSArray<Patch *> *)patch_fromText:(NSString *)textline error:(NSError **)error;
 
