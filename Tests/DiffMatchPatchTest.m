@@ -849,7 +849,7 @@
    // Theoretically this test could fail very occasionally if the
    // OS task swaps or locks up for a second at the wrong moment.
    // This will fail when running this as PPC code thru Rosetta on Intel.
-  XCTAssertTrue(((dmp.Diff_Timeout * 2) > (endTime - startTime)), @"Test that we didn't take forever (be forgiving). dmp.Diff_Timeout = %f, (endTime - startTime) = %f", dmp.Diff_Timeout, (endTime - startTime));
+  XCTAssertTrue(((dmp.Diff_Timeout * 3) > (endTime - startTime)), @"Test that we didn't take forever (be forgiving). dmp.Diff_Timeout = %f, (endTime - startTime) = %f", dmp.Diff_Timeout, (endTime - startTime));
   dmp.Diff_Timeout = 0;
 
   // Test the linemode speedup.
