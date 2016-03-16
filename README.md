@@ -1,7 +1,7 @@
 [![CI Status](http://img.shields.io/travis/NickAger/aerogear-diffmatchpatch-ios.svg?style=flat)](https://travis-ci.org/NickAger/aerogear-diffmatchpatch-ios)
 [![Version](https://img.shields.io/cocoapods/v/DiffMatchPatch.svg?style=flat)](http://cocoapods.org/pods/DiffMatchPatch)
 [![License](https://img.shields.io/cocoapods/l/DiffMatchPatch.svg?style=flat)](http://cocoapods.org/pods/DiffMatchPatch)
-[![Platform](https://img.shields.io/cocoapods/p/DiffMatchPatch.svg?style=flat)](http://cocoapods.org/pods/DiffMatchPatch
+[![Platform](https://img.shields.io/cocoapods/p/DiffMatchPatch.svg?style=flat)](http://cocoapods.org/pods/DiffMatchPatch)
 
 
 # DiffMatchPatch for iOS / MacOSX
