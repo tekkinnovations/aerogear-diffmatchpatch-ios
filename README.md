@@ -35,7 +35,7 @@ You can also run test from the command:
 
 
 ## Cocoapods
-This project can be made into a [Cocoapod](http://www.cocoapods.org/):
+This project can be made into a [CocoaPods](http://www.cocoapods.org/):
 
 First install the Cocoapods gem by running:
 
