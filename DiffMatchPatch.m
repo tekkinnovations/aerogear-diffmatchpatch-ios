@@ -54,8 +54,8 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
 
 /**
  * Constructor.  Initializes the diff with the provided values.
- * @param operation One of DIFF_INSERT, DIFF_DELETE or DIFF_EQUAL.
- * @param text The text being applied.
+ * @param anOperation One of DIFF_INSERT, DIFF_DELETE or DIFF_EQUAL.
+ * @param aText The text being applied.
  */
 + (instancetype)diffWithOperation:(Operation)anOperation
                 andText:(NSString *)aText
@@ -417,7 +417,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  * substring is at least half the length of longtext?
  * @param longtext Longer NSString.
  * @param shorttext Shorter NSString.
- * @param i Start index of quarter length substring within longtext.
+ * @param index Start index of quarter length substring within longtext.
  * @return Five element NSArray, containing the prefix of longtext, the
  *     suffix of longtext, the prefix of shorttext, the suffix of shorttext
  *     and the common middle.  Or nil if there was no match.
@@ -610,8 +610,8 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  * Find the 'middle snake' of a diff, split the problem in two
  * and return the recursively constructed diff.
  * See Myers 1986 paper: An O(ND) Difference Algorithm and Its Variations.
- * @param text1 Old string to be diffed.
- * @param text2 New string to be diffed.
+ * @param _text1 Old string to be diffed.
+ * @param _text2 New string to be diffed.
  * @param deadline Time at which to bail if not yet complete.
  * @return NSMutableArray of Diff objects.
  */
@@ -841,8 +841,8 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
 /**
  * Rehydrate the text in a diff from an NSString of line hashes to real lines
  * of text.
- * @param NSArray of Diff objects.
- * @param NSMutableArray of unique strings.
+ * @param diffs NSArray of Diff objects.
+ * @param lineArray NSMutableArray of unique strings.
  */
 - (void)diff_chars:(NSArray *)diffs toLines:(NSMutableArray *)lineArray
 {
@@ -861,7 +861,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
 /**
  * Reorder and merge like edit sections.  Merge equalities.
  * Any edit section can move as long as it doesn't cross an equality.
- * @param diffs an array of Diff objects.
+ * @param immutableDiffs an array of Diff objects.
  */
 - (NSArray<Diff *> *)diff_cleanupMerge:(NSArray<Diff *> *)immutableDiffs
 {
@@ -1007,7 +1007,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  * Look for single edits surrounded on both sides by equalities
  * which can be shifted sideways to align the edit to a word boundary.
  * e.g: The c<ins>at c</ins>ame. -> The <ins>cat </ins>came.
- * @param diffs an array of Diff objects.
+ * @param immutableDiffs an array of Diff objects.
  */
 - (NSArray<Diff *> *)diff_cleanupSemanticLossless:(NSArray<Diff *> *)immutableDiffs
 {
@@ -1106,7 +1106,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
 /**
  * Reduce the number of edits by eliminating operationally trivial
  * equalities.
- * @param diffs an array of Diff objects.
+ * @param immutableDiffs an array of Diff objects.
  */
 - (NSArray<Diff *> *)diff_cleanupEfficiency:(NSArray<Diff *> *)immutableDiffs
 {
@@ -1480,7 +1480,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
 /**
  * Reduce the number of edits by eliminating semantically trivial
  * equalities.
- * @param diffs an array of Diff objects.
+ * @param immutableDiffs an array of Diff objects.
  */
 - (NSArray<Diff *> *)diff_cleanupSemantic:(NSArray<Diff *> *)immutableDiffs;
 {
@@ -1955,7 +1955,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  * @return an array of Patch objects.
  * @deprecated Prefer -patch_makeFromOldString:diffs:.
  */
-- (NSArray<Patch *> * _Nullable)patch_makeFromOldString:(NSString *)text1
+- (NSArray<Patch *> * _Nullable) __deprecated_msg("Use patch_makeFromOldString:diffs instead.") patch_makeFromOldString:(NSString *)text1
                                   newString:(NSString *)text2
                                       diffs:(NSArray<Diff *> *)diffs;
 {
@@ -2071,7 +2071,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
 /**
  * Merge a set of patches onto the text.  Return a patched text, as well
  * as an array of YES/NO values indicating which patches were applied.
- * @param patches an array of Patch objects
+ * @param sourcePatches an array of Patch objects
  * @param text Old text.
  * @return Two element NSArray, containing the new text and an array of
  *      BOOL values.
@@ -2259,7 +2259,7 @@ void splice(NSMutableArray *input, NSUInteger start, NSUInteger count, NSArray *
  * Look through the patches and break up any which are longer than the
  * maximum limit of the match algorithm.
  * Intended to be called only from within patch_apply.
- * @param patches an array of Patch objects.
+ * @param immutablePatches an array of Patch objects.
  */
 - (NSArray<Patch *> *)patch_splitMax:(NSArray<Patch *> *)immutablePatches;
 {

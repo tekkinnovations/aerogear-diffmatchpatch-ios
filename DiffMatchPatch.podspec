@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = 'http://code.google.com/p/google-diff-match-patch'
   s.license      = {:type => 'Apache License, Version 2.0', :file => 'COPYING'}
   s.author       = {'Neil Fraser' => 'fraser@google.com', 'Jan Weiss' => 'jan@geheimwerk.de'}
-  s.source       = { :git => 'https://github.com/aerogear/aerogear-diffmatchpatch-ios.git'}
+  s.source       = { :git => 'https://github.com/aerogear/aerogear-diffmatchpatch-ios.git', :tag => s.version.to_s }
   s.source_files = '*.{h,m,c}'
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.10'
