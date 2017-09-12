@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.author       = {'Neil Fraser' => 'fraser@google.com', 'Jan Weiss' => 'jan@geheimwerk.de'}
   s.source       = { :git => 'https://github.com/aerogear/aerogear-diffmatchpatch-ios.git', :tag => s.version.to_s }
   s.source_files = '*.{h,m,c}'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.10'
   s.requires_arc = true
 end
