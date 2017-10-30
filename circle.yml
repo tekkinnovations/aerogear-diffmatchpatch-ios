@@ -5,7 +5,7 @@ machine:
     XCODE_PROJECT: "DiffMatchPatch.xcodeproj"
     XCODE_SCHEME: "DiffMatchPatch"
     SIMULATOR: "iPhone 7"
-    OS: "11.0"
+    OS: "11.0.1"
 
 test:
   override:
