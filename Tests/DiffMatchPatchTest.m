@@ -45,7 +45,6 @@
 
   // Whole case.
   XCTAssertEqual((NSUInteger)4, [dmp diff_commonPrefixOfFirstString:@"1234" andSecondString:@"1234xyz"], @"Common suffix whole case failed.");
-
 }
 
 - (void)test_diff_commonSuffixTest {
@@ -78,6 +77,9 @@
 
   // Overlap.
   XCTAssertEqual((NSUInteger)3, [dmp diff_commonOverlapOfFirstString:@"123456xxx" andSecondString:@"xxxabcd"], @"Detect any suffix/prefix overlap. Overlap.");
+
+  // Entire 2nd string is suffix of first string
+  XCTAssertEqual((NSUInteger)3, [dmp diff_commonOverlapOfFirstString:@"1234" andSecondString:@"234"], @"Detect any suffix/prefix overlap. Overlap 2nd string suffix.");
 
   // Unicode.
   // Some overly clever languages (C#) may treat ligatures as equal to their

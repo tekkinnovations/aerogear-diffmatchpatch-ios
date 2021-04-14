@@ -258,6 +258,11 @@ CFIndex diff_commonOverlap(CFStringRef text1, CFStringRef text2) {
     CFIndex best = 0;
     CFIndex length = 1;
     while (true) {
+      if (length > text1_trunc_length) {
+        common_overlap = best;
+        break;
+      }
+
       CFStringRef pattern = diff_CFStringCreateRightSubstring(text1_trunc, text1_trunc_length, length);
       CFRange foundRange = CFStringFind(text2_trunc, pattern, 0);
       CFRelease(pattern);
