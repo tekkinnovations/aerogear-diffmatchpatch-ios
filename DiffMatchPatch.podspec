@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'DiffMatchPatch'
-  s.version      = '0.1.2'
+  s.version      = '0.1.3'
   s.summary      = 'The Google Diff Match and Patch lib with updates to work with Swift projects'
   s.homepage     = 'http://code.google.com/p/google-diff-match-patch'
   s.license      = {:type => 'Apache License, Version 2.0', :file => 'COPYING'}
