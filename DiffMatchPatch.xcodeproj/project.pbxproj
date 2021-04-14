@@ -17,8 +17,6 @@
 		3DA64278128DE8C900B33CE9 /* DiffMatchPatchTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5BC0DE128CAAE400B8F5FF /* DiffMatchPatchTest.m */; };
 		3DC87026129FF4B6001F602B /* NSString+JavaSubstring.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC87024129FF4B6001F602B /* NSString+JavaSubstring.m */; };
 		3DEE4C73129D484D00885485 /* NSMutableDictionary+DMPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DEE4C71129D484D00885485 /* NSMutableDictionary+DMPExtensions.m */; };
-		3DFDB2FA12AEC7700084EFE3 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFDB2F912AEC7700084EFE3 /* libstdc++.6.dylib */; };
-		3DFDB2FB12AEC77E0084EFE3 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DFDB2F912AEC7700084EFE3 /* libstdc++.6.dylib */; };
 		5AD1E7EB1AE267700017CEEE /* DiffMatchPatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D5BC07E128C44A700B8F5FF /* DiffMatchPatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5AD1E7EC1AE267D50017CEEE /* DiffMatchPatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5BC07F128C44A700B8F5FF /* DiffMatchPatch.m */; };
 		5AD1E7ED1AE267D50017CEEE /* NSString+JavaSubstring.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC87024129FF4B6001F602B /* NSString+JavaSubstring.m */; };
@@ -93,7 +91,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D0D3FAB128CBD350093B0C7 /* DiffMatchPatch.framework in Frameworks */,
-				3DFDB2FA12AEC7700084EFE3 /* libstdc++.6.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +114,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D5BBFDF128C416900B8F5FF /* Foundation.framework in Frameworks */,
-				3DFDB2FB12AEC77E0084EFE3 /* libstdc++.6.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
